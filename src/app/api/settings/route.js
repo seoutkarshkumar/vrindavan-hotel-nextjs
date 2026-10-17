@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { requireAdminApi } from '@/lib/auth';
@@ -77,3 +78,4 @@ export async function PUT(request) {
     );
   }
 }
+
