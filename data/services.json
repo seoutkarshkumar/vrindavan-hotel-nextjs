@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "icon": "Utensils",
+    "title": "Pure Veg Restaurant",
+    "description": "Authentic satvik cuisine — no onion, no garlic — prepared by temple-trained chefs."
+  },
+  {
+    "id": 2,
+    "icon": "Car",
+    "title": "Temple Darshan Cab",
+    "description": "Comfortable AC cabs for full-day temple tours across Vrindavan & Mathura."
+  },
+  {
+    "id": 3,
+    "icon": "Sparkles",
+    "title": "Yoga & Meditation",
+    "description": "Daily sunrise yoga sessions on our rooftop with a view of Yamuna."
+  },
+  {
+    "id": 4,
+    "icon": "Wifi",
+    "title": "Free High-Speed Wi-Fi",
+    "description": "Blazing-fast internet across the entire property, lobby to rooftop."
+  },
+  {
+    "id": 5,
+    "icon": "ConciergeBell",
+    "title": "24×7 Concierge",
+    "description": "Round-the-clock help — from aarti timings to laundry to airport pickup."
+  },
+  {
+    "id": 6,
+    "icon": "HeartHandshake",
+    "title": "Pilgrimage Assistance",
+    "description": "Guided tours of Banke Bihari, ISKCON, Prem Mandir & Nidhivan."
+  }
+]

@@ -1,0 +1,185 @@
+// Prisma Schema for Vrindavan Hotel (Next.js + SQLite / Postgres compatible)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 1. Admin User (Authentication & Security)
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String   @default("Hotel Owner")
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// 2. Site Settings (Global Hotel Info, Branding, Analytics, Robots.txt)
+model SiteSetting {
+  id                       Int      @id @default(1)
+  hotelName                String   @default("[Hotel Naam]")
+  tagline                  String   @default("A Divine & Peaceful Stay Near Banke Bihari Temple, Vrindavan")
+  brandColor               String   @default("#c2410c")
+  domain                   String   @default("https://vrindavanhotel.com")
+  phone                    String   @default("[Phone Number]")
+  whatsapp                 String   @default("[WhatsApp Number]")
+  email                    String   @default("[Email Address]")
+  address                  String   @default("[Full Address, Vrindavan, Mathura, UP 281121]")
+  distanceFromBankeBihari  String   @default("[e.g. 600 m]")
+  checkInTime              String   @default("[12:00 PM]")
+  checkOutTime             String   @default("[11:00 AM]")
+  priceRange               String   @default("₹[Deluxe Price] - ₹[Suite Price]")
+  amenitiesList            String   @default("[\"Free High-Speed Wi-Fi\",\"AC Rooms\",\"24x7 Hot & Cold Water\",\"Pure Satvik Veg Food\",\"Parking Available\",\"Temple Darshan Assistance\",\"Lift / Elevator\",\"Power Backup\"]") // JSON array
+  logoUrl                  String   @default("")
+  mapEmbedUrl              String   @default("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3538.8!2d77.69!3d27.58!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVrindavan!5e0!3m2!1sen!2sin!4v1700000000000")
+  geoLatitude              String   @default("27.5806")
+  geoLongitude             String   @default("77.6913")
+  googleBusinessUrl        String   @default("")
+  facebookUrl              String   @default("")
+  instagramUrl             String   @default("")
+  youtubeUrl               String   @default("")
+  googleAnalyticsId        String   @default("")
+  searchConsoleCode        String   @default("")
+  indexNowApiKey           String   @default("vrindavan-hotel-indexnow-key-2026")
+  defaultMetaTitle         String   @default("[Hotel Naam] - Best Family Hotel Near Banke Bihari Temple, Vrindavan")
+  defaultMetaDescription   String   @default("Book direct and save 10% at [Hotel Naam], located just [e.g. 600 m] from Banke Bihari Temple in Vrindavan. Clean AC rooms, family suites, parking & satvik food.")
+  defaultOgImage           String   @default("https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80")
+  robotsTxtCustom          String   @default("")
+  promoBannerText          String   @default("Book Direct on Website / WhatsApp & Save 10% Instantly!")
+  updatedAt                DateTime @updatedAt
+}
+
+// 3. Pages & Blog Posts (Unified Content + Full Technical SEO + FAQs)
+model Page {
+  id                Int       @id @default(autoincrement())
+  type              String    @default("page") // "page" | "location" | "blog" | "system"
+  slug              String    @unique
+  title             String    // H1 Page Title
+  excerpt           String    @default("")
+  content           String    // Rich HTML content
+  category          String    @default("General")
+  tags              String    @default("[]") // JSON string array
+  author            String    @default("Hotel Team")
+
+  // Complete Technical SEO Fields
+  seoTitle          String    @default("")
+  metaDescription   String    @default("")
+  focusKeyword      String    @default("")
+  canonicalUrl      String    @default("")
+  canonicalOverride Boolean   @default(false)
+  featuredImage     String    @default("")
+  featuredImageAlt  String    @default("")
+  ogTitle           String    @default("")
+  ogDescription     String    @default("")
+  ogImage           String    @default("")
+  isIndexed         Boolean   @default(true) // true = index,follow | false = noindex,nofollow
+
+  // Structured FAQs (JSON array of { question, answer })
+  faqs              String    @default("[]")
+
+  // Location Page specific metadata (optional)
+  landmarkName      String    @default("")
+  distanceFromHotel String    @default("")
+
+  // Publishing & Scheduling
+  status            String    @default("published") // "published" | "draft" | "scheduled"
+  publishedAt       DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdAt         DateTime  @default(now())
+}
+
+// 4. Rooms (Hotel Rooms + Individual Room SEO + FAQs + Schema Offer)
+model Room {
+  id                Int       @id @default(autoincrement())
+  slug              String    @unique
+  name              String    // e.g. Deluxe Room, Family Room, Suite
+  pricePlaceholder  String    @default("₹__") // e.g. "₹__" until owner sets actual price
+  priceNumeric      Int       @default(0)     // 0 if placeholder, or e.g. 2499
+  capacity          Int       @default(2)
+  bedType           String    @default("1 King Bed")
+  roomSize          String    @default("280 sq ft")
+  shortDescription  String    @default("")
+  description       String    @default("") // Rich HTML or text
+  amenities         String    @default("[]") // JSON array of strings
+  images            String    @default("[]") // JSON array of { url, alt }
+  featured          Boolean   @default(true)
+  isPublished       Boolean   @default(true)
+  sortOrder         Int       @default(0)
+
+  // Room-specific SEO & FAQs
+  seoTitle          String    @default("")
+  metaDescription   String    @default("")
+  focusKeyword      String    @default("")
+  canonicalUrl      String    @default("")
+  canonicalOverride Boolean   @default(false)
+  featuredImage     String    @default("")
+  featuredImageAlt  String    @default("")
+  ogTitle           String    @default("")
+  ogDescription     String    @default("")
+  ogImage           String    @default("")
+  isIndexed         Boolean   @default(true)
+  faqs              String    @default("[]") // JSON array of { question, answer }
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+// 5. Booking Enquiries / Leads
+model Enquiry {
+  id           Int      @id @default(autoincrement())
+  name         String
+  phone        String
+  email        String   @default("")
+  checkIn      String
+  checkOut     String
+  guests       String   @default("2 Adults")
+  roomType     String   @default("Deluxe Room")
+  enquiryType  String   @default("Room Booking") // "Room Booking" | "Group Booking" | "General Contact"
+  message      String   @default("")
+  status       String   @default("New") // "New" | "Contacted" | "Booked" | "Cancelled"
+  notes        String   @default("")    // Admin internal notes
+  sourcePage   String   @default("/")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// 6. Media Library (Uploaded & Optimized WebP Images)
+model Media {
+  id        Int      @id @default(autoincrement())
+  filename  String
+  url       String
+  altText   String   @default("")
+  mimeType  String   @default("image/webp")
+  sizeBytes Int      @default(0)
+  width     Int      @default(0)
+  height    Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+// 7. 301 Redirects Manager (Auto-created on slug change + manual entries)
+model Redirect {
+  id         Int      @id @default(autoincrement())
+  fromPath   String   @unique // e.g. "/old-slug/"
+  toPath     String           // e.g. "/new-slug/"
+  statusCode Int      @default(301)
+  isAuto     Boolean  @default(false)
+  hits       Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+// 8. Guest Testimonials
+model Testimonial {
+  id          Int      @id @default(autoincrement())
+  guestName   String
+  guestCity   String   @default("Delhi")
+  rating      Int      @default(5)
+  comment     String
+  stayDate    String   @default("Recent Stay")
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}

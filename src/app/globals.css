@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #fdfbf7;
+    color: #1c1917;
+  }
+
+  body {
+    @apply bg-cream-50 text-stone-900 antialiased;
+  }
+}
+
+/* Rich Text Content Styling (for visual editor output on public pages) */
+.prose-vrindavan h2 {
+  @apply text-2xl md:text-3xl font-serif font-bold text-stone-900 mt-8 mb-4;
+}
+.prose-vrindavan h3 {
+  @apply text-xl md:text-2xl font-serif font-semibold text-stone-800 mt-6 mb-3;
+}
+.prose-vrindavan p {
+  @apply text-stone-700 leading-relaxed mb-4 text-base md:text-lg;
+}
+.prose-vrindavan ul {
+  @apply list-disc list-inside space-y-2 mb-5 text-stone-700;
+}
+.prose-vrindavan ol {
+  @apply list-decimal list-inside space-y-2 mb-5 text-stone-700;
+}
+.prose-vrindavan a {
+  @apply text-brand-700 underline font-medium hover:text-brand-800;
+}
+.prose-vrindavan table {
+  @apply w-full border-collapse my-6 text-left text-sm md:text-base;
+}
+.prose-vrindavan th {
+  @apply bg-brand-50 border border-brand-200 px-4 py-2.5 font-semibold text-brand-900;
+}
+.prose-vrindavan td {
+  @apply border border-stone-200 px-4 py-2.5 text-stone-700 bg-white;
+}
+.prose-vrindavan img {
+  @apply rounded-xl shadow-md my-6 max-w-full h-auto;
+}

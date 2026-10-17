@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "createdAt": "2026-07-09T19:58:00.240Z",
+    "status": "confirmed",
+    "name": "Virat saxena",
+    "email": "viratsaxena79@gmail.com",
+    "phone": "06307002962",
+    "checkIn": "2026-07-11",
+    "checkOut": "2026-07-18",
+    "guests": "2",
+    "roomType": "Deluxe Room",
+    "notes": "caweghqe",
+    "type": "booking"
+  }
+]
