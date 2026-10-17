@@ -5,7 +5,7 @@
   "description": "Vrindavan Hotel - Next.js (App Router) SSR + Prisma + Full SEO & Admin Panel",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && prisma db push && next build",
     "start": "next start",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
