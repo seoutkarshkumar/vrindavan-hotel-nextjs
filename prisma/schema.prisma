@@ -184,3 +184,4 @@ model Testimonial {
   isPublished Boolean  @default(true)
   createdAt   DateTime @default(now())
 }
+// GitHub update fix
